@@ -1,0 +1,25 @@
+1、pandas载入数据（csv):
+    rs = pd.read_csv(filepath_or_buffer,header,sep='')
+    filepath_or_buffer:文件路径
+    sep = '，' ：以 ， 为数据分隔符
+2、观察rs
+    rs.shape：
+    rs.head().append(rs.tail())：简略观察数据
+3、总览数据概况
+    rs.describe()：关于每列的统计量
+    rs.info()：了解每列的type
+    missing = rs.isnull().sum()：判断数据缺失和异常(如果缺失的少，可选择填充；缺失多，可删除）
+    msno.matrix(data)：可视化查看缺省值
+    msno.bar(data)：条形图，列的无效的可视化
+    np.nan :一个float类型表示为空的数据
+4、了解预测值分布
+    rs['字段'].value_counts()
+5、数字特征分析
+    rs[numeric_features].corr()
+    rs[col].skew() 、 rs[col].kurt() ：偏度和峰值
+    可视化： f = pd.melt(rs, value_vars=numeric_features)
+            g = sns.FacetGrid(f, col="variable",  col_wrap=2, sharex=False, sharey=False)
+            g = g.map(sns.distplot, "value")
+6、类别特征分析
+    unique分布：for fea in categorical_features:
+                  print(rs[fea].nunique())
